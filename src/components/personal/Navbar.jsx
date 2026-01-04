@@ -127,7 +127,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="container relative lg:mx-auto bg-white z-10 flex items-center justify-between pt-3 px-4 md:px-8">
+      <div className="container relative lg:mx-auto bg-white z-10 flex items-center justify-between pt-3 px-4 md:px-8 ">
         <Link href="/">
           <Image src={logo} width={200} height={100} alt="MineralCat PTE" />
         </Link>
@@ -139,7 +139,7 @@ export default function Navbar() {
           <AlignJustify />
         </button>
 
-        <div className="p-px hidden lg:block bg-linear-to-r from-[#5A0000] to-[#EF5634] rounded-lg">
+        <div className="p-px hidden lg:block bg-linear-to-r from-[#5A0000] to-[#EF5634] rounded-lg shadow-[0_10px_20px_-12px_rgba(0,0,0,0.60)]">
           <div className="flex gap-10 items-center bg-white p-4 rounded-lg px-10">
             <div className="flex gap-10 items-center">
               {navItems.map((item, index) => {
@@ -149,7 +149,9 @@ export default function Navbar() {
                       key={item.label}
                       type="button"
                       className="text-[18px] cursor-pointer transition-colors duration-500 ease-in-out flex items-center gap-2"
-                      style={hoveredIndex === index ? gradientStyle : normalStyle}
+                      style={
+                        hoveredIndex === index ? gradientStyle : normalStyle
+                      }
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
                       onClick={handlePracticeClick}
@@ -265,7 +267,9 @@ export default function Navbar() {
                       key={item.label}
                       type="button"
                       className="text-[18px] cursor-pointer py-2 transition-colors duration-300 ease-in-out border-b border-gray-100 text-left"
-                      style={hoveredIndex === index ? gradientStyle : normalStyle}
+                      style={
+                        hoveredIndex === index ? gradientStyle : normalStyle
+                      }
                       onMouseEnter={() => setHoveredIndex(index)}
                       onMouseLeave={() => setHoveredIndex(null)}
                       onClick={() => {

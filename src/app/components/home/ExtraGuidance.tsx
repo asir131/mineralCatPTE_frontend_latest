@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const ExtraGuidance = () => {
   return (
-    <div className=" flex items-center py-20 md:py-0 justify-center xl:mb-0 xl:-mt-15 lg:p-30 p-6">
+    <div className=" flex items-center py-20 md:py-0 justify-center xl:mb-0 xl:-mt-5 lg:p-30 p-6 ">
       <div className="lg:flex gap-8 lg:gap-30 max-w-6xl items-center justify-between bg-linear-to-r from-[#A52B1A] to-[#EF5634] text-white rounded-2xl w-full">
         {/* Text Content */}
         <div className="lg:pl-6 p-6 lg:p-0 lg:w-1/2">

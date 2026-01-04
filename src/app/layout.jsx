@@ -1,8 +1,8 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
-import Footer from './../components/personal/Footer';
-import Navbar from './../components/personal/Navbar';
+import Footer from "./../components/personal/Footer";
+import Navbar from "./../components/personal/Navbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,11 +26,9 @@ export default function RootLayout({ children }) {
         {/* Use SVG favicon */}
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
-      <body className={`antialiased bg-white ${poppins.className}`}>
+      <body className={`antialiased bg-white ${poppins.className} `}>
         <Navbar />
-        <section className="min-h-dvh">
-          {children}
-        </section>
+        <section className="min-h-dvh">{children}</section>
         <footer className="mt-10 w-full">
           <Footer />
         </footer>
