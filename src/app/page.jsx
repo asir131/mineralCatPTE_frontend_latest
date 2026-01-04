@@ -1,40 +1,31 @@
-import Banner from "@/components/home/Banner";
-import FAQSection from "@/components/home/FaqSection";
-import Platform from "@/components/home/Platform";
-import PracticeOverview from "@/components/home/PracticeOverview";
-import Title from "@/components/Reusable/Title";
+import Hero from "./components/home/Hero";
+import ChoosePrep from "./components/home/ChoosePrep";
+import PracticeOverview from "./components/home/PracticeOverview";
+import FAQ from "./components/home/FAQ";
+import WhereverUare from "./components/home/WhereverUare";
+import UsersSaying from "./components/home/UsersSaying";
+import ChoosePlan from "./components/home/ChoosePlan";
+import ExtraGuidance from "./components/home/ExtraGuidance";
+import WelcomePrepMyPTE from "./components/home/WelcomePrepMyPTE";
+import CoachingPlan from "./components/pricing/CoachingPlan";
 
 export default function Home() {
   return (
-    <div className="max-w-full items-center justify-items-center p-8 pb-20 gap-16 sm:p-20">
-      {/* headding */}
-      <div className="mt-[52px]">
-        <Title
-          heading="Ace Your PTE Core Exam"
-          subheading="with AI-Powered Practice!"
-          pragraph="Boost your scores with real-time AI scoring, mock tests!"
-        />
+    <div className="w-full overflow-hidden">
+      <div>
+        <Hero />
       </div>
-
-      {/* banner */}
-      <section>
-        <Banner />
-      </section>
-
-      {/* platform */}
-      <section>
-        <Platform />
-      </section>
-
-      {/* pacytice overview */}
-      <section>
-        <PracticeOverview />
-      </section>
-
-      {/* Faq section */}
-      <section>
-        <FAQSection />
-      </section>
+      <WelcomePrepMyPTE />
+      <div className="md:mb-30 md:mt-45 xl:mb-15 xl:mt-35">
+        <ChoosePrep />
+      </div>
+      <PracticeOverview />
+      <FAQ />
+      <WhereverUare />
+      <UsersSaying />
+      <ChoosePlan />
+      <CoachingPlan />
+      <ExtraGuidance />
     </div>
   );
 }

@@ -1,32 +1,21 @@
 "use client";
-import { useState, FormEvent } from "react";
-import logo from "@/../public/rafiki.png";
-
-import { PiEyeClosedBold, PiEyeClosedDuotone } from "react-icons/pi";
-import axios from "axios";
-import { IoMdCheckboxOutline } from "react-icons/io";
-import { MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
-// changed to react-router-dom for better TS support
 import Image from "next/image";
 import Link from "next/link";
+import { useState, FormEvent } from "react";
+import loginImage from "@/../public/login/login.png";
+import { Eye, EyeOff } from "lucide-react";
+import { FaGoogle } from "react-icons/fa";
+import axios from "axios";
 
-// const BASE_URL = import.meta.env.VITE_ADMIN_URL as string;
 const BASE_URL = process.env.NEXT_PUBLIC_URL as string;
 
-// console.log("BASE_URL:", BASE_URL);
-
-export default function LogIn() {
-  const [isEyeOpen, setIsEyeOpen] = useState(false);
+export default function Page() {
+  const [eye, setEye] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
-  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
-  const data = {
-    greetings: "Welcome back!",
-    message: "Please enter your email and password to continue.",
-  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +36,7 @@ export default function LogIn() {
         email,
         password,
       });
+
       if (response.status !== 200) {
         setError("Login failed. Please check your credentials.");
         setLoading(false);
@@ -55,8 +45,7 @@ export default function LogIn() {
 
       localStorage.setItem("accessToken", response?.data?.accessToken);
       localStorage.setItem("refreshToken", response?.data?.refreshToken);
-      //   navigate("/"); // Redirect to the home page or dashboard after successful login
-      window.location.href = "/dashboard"; // Using window.location.href for redirection
+      window.location.href = "/dashboard";
     } catch (err) {
       console.error("Login error:", err);
       setError("Login failed. Please check your credentials.");
@@ -66,131 +55,121 @@ export default function LogIn() {
   };
 
   return (
-    <div className="grid grid-cols-1 bg-white lg:grid-cols-4 w-full">
-      {/* img */}
-      <section className="flex flex-col justify-center items-center bg-[#ffffff] col-span-1 lg:col-span-2">
-        <Image src={logo} alt="main logo" />
-      </section>
-
-      {/* form */}
-      <section className="flex justify-center items-center bg-[#ffffff] col-span-1 lg:col-span-2 lg:gap-x-7">
-        <div className="w-[2px] flex flex-col justify-center items-center bg-[#ffffff] ">
-          <div className="w-[2px] h-[800px] bg-[#7D0000]"></div>
-        </div>
+    <div className="lg:flex justify-around md:mt-20 px-5 py-10 md:px-0 md:py-0">
+      <div className="hidden lg:block">
+        <h1 className="font-bold text-2xl md:text-[48px]">MineralCat PTE</h1>
+        <h1 className="font-bold md:text-[30px] mt-8">
+          Your Complete <span className="text-[#DE3B40]">PTE Core Prep Platform</span>
+        </h1>
+        <h1 className="font-bold md:text-[30px] mb-5">
+          No account yet?{" "}
+          <Link className="text-[#DE3B40]" href="/auth/sign-up">
+            Sign Up Here!
+          </Link>
+        </h1>
         <div>
-          <div>
-            <h3 className="text-[#7D0000] text-4xl font-[600] leading-[1.2] tracking-normal text-center">
-              {data.greetings}
-            </h3>
-            <p className="text-[#646464] text-base text-[28px] font-[500] leading-[1.2] tracking-normal text-center mt-2">
-              {data.message}
-            </p>
-          </div>
+          <Image src={loginImage} height={100} width={600} alt="Login Illustration" />
+        </div>
+      </div>
 
-          <form onSubmit={handleSubmit} className="w-full md:w-full px-4">
-            <div className="mb-4 mt-5">
-              <label
-                htmlFor="email"
-                className="text-[25px] text-center text-[#262626] font-[500]"
-              >
-                Email
-              </label>
+      <div className="md:border-l border-[#7D0000] md:pl-20 mt-0 md:mt-0">
+        <h1 className="font-bold text-[30px] text-[#781216]">Welcome back !</h1>
+        <p className="text-[16px]">Please enter your email and password to continue.</p>
+        <form className="mt-5" onSubmit={handleSubmit}>
+          <div>
+            <label className="font-medium text-[12px]" htmlFor="email">
+              Email
+            </label>
+            <div className="border md:w-150 my-3 rounded-xl border-[#DFE3E7] px-5 py-4">
               <input
+                className="outline-none w-full"
                 type="email"
-                name="email"
                 id="email"
-                autoComplete="on"
                 placeholder="please enter your email"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   setError(null);
                 }}
-                onFocus={() => setError(null)}
-                className="border-border border rounded-md outline-none px-4 w-full h-[72px] text-[#646464] text-[20px] font-[500] mt-1 py-3 focus:border-primary transition-colors duration-300"
               />
             </div>
+          </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="text-[25px] text-center text-[#262626] font-[500]"
+          <div>
+            <label className="font-medium text-[12px]" htmlFor="password">
+              Password
+            </label>
+            <div className="border flex justify-between items-center md:w-150 my-3 rounded-xl border-[#DFE3E7] px-5 py-4">
+              <input
+                className="outline-none w-full"
+                type={eye ? "text" : "password"}
+                id="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                className="cursor-pointer"
+                type="button"
+                onClick={() => setEye(!eye)}
+                aria-label={eye ? "Hide password" : "Show password"}
               >
-                Password
-              </label>
-              <div className="w-full relative">
-                <input
-                  type={isEyeOpen ? "text" : "password"}
-                  name="password"
-                  id="password"
-                  autoComplete="off"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                  onFocus={() => setError(null)}
-                  className="border-border border text-[#646464] text-[20px] font-[500] rounded-md outline-none px-4 w-full h-[72px] mt-1 py-3 focus:border-primary transition-colors duration-300"
-                />
-                {isEyeOpen ? (
-                  <PiEyeClosedBold
-                    className="absolute top-7 right-2 text-[1.5rem] text-[#777777] cursor-pointer"
-                    onClick={() => setIsEyeOpen(false)}
-                  />
-                ) : (
-                  <PiEyeClosedDuotone
-                    className="absolute top-7 right-2 text-[1.5rem] text-[#777777] cursor-pointer"
-                    onClick={() => setIsEyeOpen(true)}
-                  />
-                )}
-              </div>
+                {eye ? <EyeOff className="opacity-50" /> : <Eye className="opacity-50" />}
+              </button>
             </div>
+          </div>
 
-            {error && (
-              <p className="text-red-600 font-semibold mt-2 text-left">
-                {error}
-              </p>
-            )}
+          {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
 
-            {/* remember sections */}
-            <div className="flex justify-between mt-4 flex-col lg:flex-row gap-y-4 lg:gap-y-0">
-              <div className="flex items-center ">
-                {isChecked ? (
-                  <IoMdCheckboxOutline
-                    className="text-[#7D0000] text-[1.5rem] cursor-pointer"
-                    onClick={() => setIsChecked(false)}
-                  />
-                ) : (
-                  <MdOutlineCheckBoxOutlineBlank
-                    className="text-[#7D0000] text-[1.5rem] cursor-pointer"
-                    onClick={() => setIsChecked(true)}
-                  />
-                )}
-                <label
-                  htmlFor="remember"
-                  className="ml-2 text-[#7D0000] text-[20px] font-[500]"
-                >
-                  Remember me
-                </label>
-              </div>
-              <Link
-                href={"/auth/login/forgot-password"}
-                className="text-[#7D0000] underline text-[20px] font-[500]"
-              >
-                Forgot Password?
-              </Link>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="border-border border text-[#F3F3F3] text-[24px] font-[600] rounded-[40px] outline-none px-4 w-full h-[72px] mt-6 py-3 focus:border-primary transition-colors duration-300 [background-image:linear-gradient(to_right,#D80000,#720000)] disabled:opacity-50 disabled:cursor-not-allowed"
+          <div className="flex justify-between items-center mx-1">
+            <label className="flex items-center gap-2 text-[#742023]">
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => setIsChecked(!isChecked)}
+              />
+              <span>Remember me</span>
+            </label>
+            <Link
+              className="text-[#742023] font-medium text-[14px]"
+              href="/auth/login/forgot-password"
             >
-              {loading ? "Signing In..." : "Sign In"}
-            </button>
-          </form>
+              Forgot Password?
+            </Link>
+          </div>
+
+          <button
+            className="bg-linear-to-r from-[#DB1F2C] to-[#7A0100] text-[18px] text-white text-center w-full py-3 mt-5 rounded-full disabled:opacity-60"
+            type="submit"
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+        <div className="flex items-center my-4 mt-10">
+          <hr className="grow border-t border-gray-300" />
+          <span className="mx-4 text-gray-500">OR</span>
+          <hr className="grow border-t border-gray-300" />
         </div>
-      </section>
+        <div className="text-center">
+          By continuing, you agree to the updated{" "}
+          <Link className="font-bold" href="/company/terms">
+            Terms of Service
+          </Link>
+          , and{" "}
+          <Link className="font-bold" href="/company/privacy">
+            Privacy Policy
+          </Link>
+          .
+          <button
+            className="bg-linear-to-r from-[#DB1F2C] to-[#7A0100] text-[18px] text-white text-center w-full py-2 mt-5 rounded-full flex items-center justify-center gap-4"
+            type="button"
+          >
+            <FaGoogle />
+            Continue with Google
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

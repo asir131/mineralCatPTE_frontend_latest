@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
         <section className="min-h-dvh">
           {children}
         </section>
-        <footer className="flex items-center justify-center mt-10">
+        <footer className="mt-10 w-full">
           <Footer />
         </footer>
       </body>
