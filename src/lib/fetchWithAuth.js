@@ -6,7 +6,7 @@ export default async function fetchWithAuth(url, options = {}) {
   // Ensure headers exist
   options.headers = {
     ...(options.headers || {}),
-    Authorization: `Bearer ${accessToken}`,
+    ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
   };
 
   // First request attempt
@@ -33,7 +33,7 @@ export default async function fetchWithAuth(url, options = {}) {
       );
       // console.log("Refresh token response status:", refreshResponse);
       // If refresh token request fails, logout
-      if (!refreshResponse === 200) {
+      if (!refreshResponse.ok) {
         logoutAndRedirect();
         return;
       }

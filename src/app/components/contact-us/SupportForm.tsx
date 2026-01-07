@@ -44,7 +44,7 @@ const SupportForm = () => {
             </div>
           </div>
           <div className="flex justify-center items-center">
-            <button className="bg-[#DE3B40] text-white text-center px-30 md:px-34 rounded-2xl my-5 py-2">
+            <button className="bg-[#DE3B40] text-white text-center px-30 md:px-31 rounded-2xl my-5 py-2">
               Send my message
             </button>
           </div>
@@ -152,4 +152,3 @@ const SupportForm = () => {
 };
 
 export default SupportForm;
-

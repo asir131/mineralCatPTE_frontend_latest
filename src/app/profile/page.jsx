@@ -49,6 +49,7 @@ const Profile = () => {
 
   // if (loading) return <p>Loading</p>;
   console.log("loading ", loading);
+  console.log("user.user", userData?.user);
   
  
 

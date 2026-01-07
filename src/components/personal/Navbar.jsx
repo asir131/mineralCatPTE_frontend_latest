@@ -124,6 +124,7 @@ export default function Navbar() {
     setUnreadCount(0);
   };
   const handleNotifClose = () => setNotifOpen(false);
+  console.log("useLoggedInUser", useLoggedInUser);
 
   return (
     <>
