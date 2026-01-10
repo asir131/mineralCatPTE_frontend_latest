@@ -10,6 +10,9 @@ import NotificationBell from "@/app/notifications/page";
 import { User } from "./User";
 import LanguageSkills from "./LanguageSkills";
 import logo from "@public/header/logo.png";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -17,6 +20,7 @@ const navItems = [
   { label: "Practice", type: "practice" },
   { label: "Mock Test", href: "/mock-test" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Coaching", type: "coaching" },
   { label: "Contact Us", href: "/contact-us" },
 ];
 
@@ -35,6 +39,7 @@ export default function Navbar() {
   const [notifLoading, setNotifLoading] = useState(false);
   const panelRef = useRef(null);
   const baseUrl = process.env.NEXT_PUBLIC_URL || "";
+  const router = useRouter();
 
   const gradientStyle = {
     background: "linear-gradient(90deg, #EF5634, #5A0000)",
@@ -52,6 +57,23 @@ export default function Navbar() {
 
   const handlePracticeClick = () => {
     setPracticeOpen(true);
+  };
+
+  const coachingUnlimited =
+    user?.user?.userSubscription?.coachingUnlimited === true;
+  const coachingDays = Number(user?.user?.userSubscription?.coachingDays || 0);
+  const canAccessCoaching = !loading && (coachingUnlimited || coachingDays >= 1);
+
+  const handleCoachingClick = (event) => {
+    if (canAccessCoaching) {
+      return;
+    }
+
+    if (event?.preventDefault) {
+      event.preventDefault();
+    }
+
+    toast.info("Buy a coaching Plan", { toastId: "coaching-plan-gate" });
   };
 
   const loadNotifications = useCallback(
@@ -128,7 +150,8 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="container relative lg:mx-auto bg-white z-10 flex items-center justify-between pt-3 px-4 md:px-8 ">
+      <ToastContainer position="top-center" autoClose={4000} />
+      <div className="container relative lg:mx-auto bg-white z-10 flex items-center justify-between pt-3 px-4 md:px-0">
         <Link href="/">
           <Image src={logo} width={200} height={100} alt="MineralCat PTE" />
         </Link>
@@ -160,6 +183,22 @@ export default function Navbar() {
                       {item.label}
                       <span className="text-[16px]">&#9662;</span>
                     </button>
+                  );
+                }
+
+                if (item.type === "coaching") {
+                  return (
+                    <Link
+                      key={item.label}
+                      href="/coaching"
+                      className="text-[18px] cursor-pointer transition-colors duration-500 ease-in-out"
+                      style={hoveredIndex === index ? gradientStyle : normalStyle}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={handleCoachingClick}
+                    >
+                      {item.label}
+                    </Link>
                   );
                 }
 
@@ -280,6 +319,25 @@ export default function Navbar() {
                     >
                       {item.label}
                     </button>
+                  );
+                }
+
+                if (item.type === "coaching") {
+                  return (
+                    <Link
+                      key={item.label}
+                      href="/coaching"
+                      className="text-[18px] cursor-pointer py-2 transition-colors duration-300 ease-in-out border-b border-gray-100 text-left"
+                      style={hoveredIndex === index ? gradientStyle : normalStyle}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={(event) => {
+                        handleCoachingClick(event);
+                        setOpenMenu(false);
+                      }}
+                    >
+                      {item.label}
+                    </Link>
                   );
                 }
 

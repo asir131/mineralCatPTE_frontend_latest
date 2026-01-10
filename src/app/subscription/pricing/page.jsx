@@ -108,7 +108,11 @@ export default function Component() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(plan.apiData)
+        body: JSON.stringify({
+          ...plan.apiData,
+          successUrl: `${window.location.origin}/pricing?success=true`,
+          cancelUrl: `${window.location.origin}/pricing`,
+        })
       })
       if (!response.ok) {
         throw new Error("Subscription failed")
