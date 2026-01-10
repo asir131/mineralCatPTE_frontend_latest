@@ -4,7 +4,6 @@ import Image from "next/image";
 import type React from "react";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import user from "@public/home/user.png";
 import colon from "@public/home/colon.png";
 interface Testimonial {
   id: number;

@@ -36,22 +36,6 @@ const History = () => {
     </svg>
   );
 
-  const mobileArrow = (
-    <svg
-      width="6"
-      height="80"
-      viewBox="0 0 6 80"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="lg:hidden"
-    >
-      <path
-        d="M2.88672 80L5.77347 75H-3.25959e-05L2.88672 80ZM2.38672 0V5H3.38672V0H2.38672ZM2.38672 10V15H3.38672V10H2.38672ZM2.38672 20V25H3.38672V20H2.38672ZM2.38672 30V35H3.38672V30H2.38672ZM2.38672 40V45H3.38672V40H2.38672ZM2.38672 50V55H3.38672V50H2.38672ZM2.38672 60V65H3.38672V60H2.38672ZM2.38672 70V75H3.38672V70H2.38672Z"
-        fill="#BCC1CA"
-      />
-    </svg>
-  );
-
   return (
     <div className="relative lg:min-h-screen w-full flex flex-col items-center px-4 py-12 lg:py-0">
       {/* Decorative images - hidden on mobile */}

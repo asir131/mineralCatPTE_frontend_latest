@@ -16,7 +16,7 @@ const OurVision = () => {
         <div className="text-center lg:text-left space-y-4 lg:space-y-0">
           <p className="lg:w-100 text-sm lg:text-base">
             At PrepMyPTE, we combine AI-powered evaluation with real exam
-            questions to deliver an experience that's both authentic and
+            questions to deliver an experience that&apos;s both authentic and
             effective.
           </p>
           <p className="lg:w-100 text-sm lg:text-base">

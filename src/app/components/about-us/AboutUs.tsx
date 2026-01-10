@@ -33,7 +33,7 @@ const AboutUs = () => {
         </span>
         <div className="mt-6 lg:mt-10 space-y-4 lg:space-y-0">
           <p className="text-base lg:w-100">
-            At PrepMyPTE, we're dedicated to helping candidates achieve their
+            At PrepMyPTE, we&apos;re dedicated to helping candidates achieve their
             goals in English proficiency for Canadian immigration and
             professional pathways.
           </p>

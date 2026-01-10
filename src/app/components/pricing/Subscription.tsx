@@ -216,7 +216,7 @@ export default function Subscription() {
       } else {
         throw new Error("Missing checkout URL");
       }
-    } catch (error) {
+    } catch {
       setErrorMsg("Could not create checkout session. Please try again.");
     } finally {
       setLoadingPlan(null);

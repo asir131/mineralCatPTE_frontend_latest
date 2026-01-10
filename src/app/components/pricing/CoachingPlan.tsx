@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import fetchWithAuth from "@/lib/fetchWithAuth";
 
-type TabType = "subscription";
 type PlanType = "Essential" | "Premium" | "Master";
 
 interface Plan {
@@ -117,7 +116,7 @@ export default function CoachingPlan() {
       } else {
         throw new Error("Missing checkout URL");
       }
-    } catch (error) {
+    } catch {
       setErrorMsg("Could not create checkout session. Please try again.");
     } finally {
       setLoadingPlan(null);
