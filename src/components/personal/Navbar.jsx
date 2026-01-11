@@ -15,12 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Features", href: "/features" },
-  { label: "Practice", type: "practice" },
-  { label: "Mock Test", href: "/mock-test" },
+  { label: "Home", href: "/", hideWhenAuth: true },
+  { label: "Features", href: "/features", hideWhenAuth: true },
+  { label: "Practice", type: "practice", authOnly: true },
+  { label: "Mock Test", href: "/mock-test", authOnly: true },
   { label: "Pricing", href: "/pricing" },
-  { label: "Coaching", type: "coaching" },
   { label: "Contact Us", href: "/contact-us" },
 ];
 
@@ -28,6 +27,19 @@ const PAGE_SIZE = 10;
 
 export default function Navbar() {
   const { user, loading, error } = useLoggedInUser();
+  const showDashboard = Boolean(user?.user);
+  const menuItems = navItems.filter((item) => {
+    if (showDashboard && item.hideWhenAuth) {
+      return false;
+    }
+    if (!showDashboard && item.authOnly) {
+      return false;
+    }
+    return true;
+  });
+  const finalMenuItems = showDashboard
+    ? [{ label: "Dashboard", href: "/dashboard" }, ...menuItems]
+    : menuItems;
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
   const [practiceOpen, setPracticeOpen] = useState(false);
@@ -166,7 +178,7 @@ export default function Navbar() {
         <div className="p-px hidden lg:block bg-linear-to-r from-[#5A0000] to-[#EF5634] rounded-lg shadow-[0_10px_20px_-12px_rgba(0,0,0,0.60)]">
           <div className="flex gap-10 items-center bg-white p-4 rounded-lg px-10">
             <div className="flex gap-10 items-center">
-              {navItems.map((item, index) => {
+              {finalMenuItems.map((item, index) => {
                 if (item.type === "practice") {
                   return (
                     <button
@@ -300,7 +312,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col gap-6 flex-1">
-              {navItems.map((item, index) => {
+              {finalMenuItems.map((item, index) => {
                 if (item.type === "practice") {
                   return (
                     <button

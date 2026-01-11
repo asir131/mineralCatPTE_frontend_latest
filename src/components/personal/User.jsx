@@ -78,13 +78,6 @@ export function User({ user, loading, error }) {
           >
             <DropdownMenuSeparator />
             <Link
-              href="/dashboard"
-              className="block px-4 py-2 hover:bg-gray-100 rounded text-gray-800 font-medium transition-all duration-200"
-              onClick={() => setDropDown(false)}
-            >
-              Dashboard
-            </Link>
-            <Link
               href="/profile"
               className="block px-4 py-2 hover:bg-gray-100 rounded text-gray-800 font-medium transition-all duration-200"
               onClick={() => setDropDown(false)}

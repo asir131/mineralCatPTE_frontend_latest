@@ -12,6 +12,8 @@ export default function Page() {
   const [eye, setEye] = useState(false);
   const [confirmEye, setConfirmEye] = useState(false);
   const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -26,6 +28,14 @@ export default function Page() {
 
     if (!name.trim()) {
       setError("Please enter your name");
+      return;
+    }
+    if (!phone.trim()) {
+      setError("Please enter your phone number");
+      return;
+    }
+    if (!city.trim()) {
+      setError("Please enter your city");
       return;
     }
     if (!email.trim()) {
@@ -45,6 +55,8 @@ export default function Page() {
     try {
       const response = await axios.post(`${BASE_URL}/auth/signup`, {
         name,
+        phone,
+        city,
         email,
         password,
       });
@@ -57,6 +69,8 @@ export default function Page() {
 
       setSuccess("Signup successful. Please sign in.");
       setName("");
+      setPhone("");
+      setCity("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
@@ -109,6 +123,44 @@ export default function Page() {
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value);
+                  setError(null);
+                }}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-medium text-[12px]" htmlFor="phone">
+              Phone Number
+            </label>
+            <div className="border md:w-150 my-3 rounded-xl border-[#DFE3E7] px-5 py-4">
+              <input
+                className="outline-none w-full"
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  setError(null);
+                }}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label className="font-medium text-[12px]" htmlFor="city">
+              City
+            </label>
+            <div className="border md:w-150 my-3 rounded-xl border-[#DFE3E7] px-5 py-4">
+              <input
+                className="outline-none w-full"
+                type="text"
+                id="city"
+                placeholder="Enter your city"
+                value={city}
+                onChange={(e) => {
+                  setCity(e.target.value);
                   setError(null);
                 }}
               />

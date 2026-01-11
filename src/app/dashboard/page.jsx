@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { ClipboardList, FileText, TrendingUp } from "lucide-react";
 import { Progress } from "../../components/ui/progressBar";
 import fetchWithAuth from "../../lib/fetchWithAuth";
 const ProgressDemo = () => {
@@ -56,12 +58,13 @@ const ProgressDemo = () => {
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#810000]"></div>
           </div>
         ) : (
-          <div className="w-full md:w-275 border-2 border-[#7D0000] rounded">
-            <div className="bg-[#7D0000] w-full text-white p-2">
-              Practice Progress
-            </div>
-            <div className="bg-[#F2E6E6] p-5 py-10 w-full">
-              <div className="bg-white md:flex justify-between gap-2 rounded-xl p-8 md:p-15 w-full">
+          <div className="grid gap-6">
+            <div className="w-full md:w-275 border-2 border-[#7D0000] rounded">
+              <div className="bg-[#7D0000] w-full text-white p-2">
+                Practice Progress
+              </div>
+              <div className="bg-[#F2E6E6] p-5 py-10 w-full">
+                <div className="bg-white md:flex justify-between gap-2 rounded-xl p-8 md:p-15 w-full">
                 <div className="md:border-r-2 grid gap-2 border-r-[#7D0000] pr-2">
                   <h1 className="flex justify-between pr-4 font-medium text-xl">
                     {data?.mockTests?.total}{" "}
@@ -444,10 +447,46 @@ const ProgressDemo = () => {
                     </div>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
-          </div>
 
+            <div className="grid gap-4 md:grid-cols-3">
+              <Link
+                href="/terms"
+                className="group flex items-center justify-center rounded-2xl bg-[#F7A6C5] px-6 py-6 text-white shadow-sm transition-transform duration-200 hover:-translate-y-1"
+              >
+                <div className="flex flex-col items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#E85C8A]">
+                    <FileText className="h-5 w-5" />
+                  </span>
+                  <span className="text-lg font-medium">Templates</span>
+                </div>
+              </Link>
+              <Link
+                href="/predictions"
+                className="group flex items-center justify-center rounded-2xl bg-[#86E6D9] px-6 py-6 text-white shadow-sm transition-transform duration-200 hover:-translate-y-1"
+              >
+                <div className="flex flex-col items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#35C3B1]">
+                    <TrendingUp className="h-5 w-5" />
+                  </span>
+                  <span className="text-lg font-medium">Predictions</span>
+                </div>
+              </Link>
+              <Link
+                href="/mock-test"
+                className="group flex items-center justify-center rounded-2xl bg-[#A8A8FF] px-6 py-6 text-white shadow-sm transition-transform duration-200 hover:-translate-y-1"
+              >
+                <div className="flex flex-col items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#6B6BDE]">
+                    <ClipboardList className="h-5 w-5" />
+                  </span>
+                  <span className="text-lg font-medium">Mock tests</span>
+                </div>
+              </Link>
+            </div>
+          </div>
         )
       }
     </div>
