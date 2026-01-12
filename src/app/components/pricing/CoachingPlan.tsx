@@ -36,7 +36,7 @@ const subscriptionPlans: Plan[] = [
   {
     id: "Premium",
     name: "Premium",
-    description: "For consistent Premiumgress",
+    description: "For consistent Progress",
     price: "$ 299.99",
     buttonText: "Get Premium",
     recommended: true,

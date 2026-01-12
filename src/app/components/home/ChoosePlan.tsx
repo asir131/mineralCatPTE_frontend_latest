@@ -10,6 +10,9 @@ interface Plan {
   id: PlanType;
   name: string;
   description: string;
+  mock?: string;
+  mockTestCount?: number;
+  apiPrice?: number;
   price: string;
   buttonText: string;
   recommended?: boolean;
@@ -24,13 +27,13 @@ const subscriptionPlans: Plan[] = [
     price: "$ 29.99",
     buttonText: "Get Starter",
     features: [
-      "3 Full Mock Tests",
+      "5 Full Mock Tests",
       "100 AI Credits",
       "Premium scoring",
       "Official PTE criteria",
       "Weekly Predictions",
       "Performance Tracking",
-      "Premium scoring",
+
       "No expiration",
     ],
   },
@@ -43,12 +46,12 @@ const subscriptionPlans: Plan[] = [
     recommended: true,
     features: [
       "7 Full Mock Tests",
-      "250 AI Credits",
+      "300 AI Credits",
       "Premium scoring",
       "Official PTE criteria",
       "Weekly Predictions",
       "Performance Tracking",
-      "Premium scoring",
+
       "No expiration",
     ],
   },
@@ -59,13 +62,13 @@ const subscriptionPlans: Plan[] = [
     price: "$ 69.99",
     buttonText: "Get Elite",
     features: [
-      "12 Full Mock Tests",
-      "500 AI Credits",
+      "15 Full Mock Tests",
+      "700 AI Credits",
       "Premium scoring",
       "Official PTE criteria",
       "Weekly Predictions",
       "Performance Tracking",
-      "Premium scoring",
+
       "No expiration",
     ],
   },
@@ -76,50 +79,56 @@ const mockTestPlans: Plan[] = [
     id: "starter",
     name: "Starter",
     description: "Basic mock tests",
-    price: "$ 9.99",
+    mock: "1 Full Mock test",
+    mockTestCount: 1,
+    apiPrice: 3.49,
+    price: "$ 3.49",
     buttonText: "Get Starter",
     features: [
       "1 Mock Test",
-      "Basic scoring",
-      "Standard feedback",
-      "Performance report",
+      "Premium scoring",
+      "Official PTE criteria",
+      "No expiration",
     ],
   },
   {
     id: "pro",
     name: "Pro",
     description: "Advanced mock tests",
-    price: "$ 19.99",
+    mock: "3 Full Mock test",
+    mockTestCount: 3,
+    apiPrice: 8.49,
+    price: "$ 8.49",
     buttonText: "Get Pro",
     recommended: true,
     features: [
       "3 Mock Tests",
-      "Advanced scoring",
-      "Detailed feedback",
-      "Performance report",
-      "AI analysis",
+      "Premium scoring",
+      "Official PTE criteria",
+      "No expiration",
     ],
   },
   {
     id: "elite",
     name: "Elite",
     description: "Premium mock tests",
-    price: "$ 29.99",
+    mock: "5 Full Mock test",
+    mockTestCount: 5,
+    apiPrice: 12.49,
+    price: "$ 12.49",
     buttonText: "Get Elite",
     features: [
       "5 Mock Tests",
       "Premium scoring",
-      "Expert feedback",
-      "Performance report",
-      "AI analysis",
-      "Priority support",
+      "Official PTE criteria",
+      "No expiration",
     ],
   },
 ];
 
 export default function ChoosePlan() {
   const [activeTab, setActiveTab] = useState<TabType>("subscription");
-  
+
   // Remove selectedPlan state and make it a constant
   const selectedPlan: PlanType = "pro"; // Always "pro" by default
 
@@ -169,6 +178,8 @@ export default function ChoosePlan() {
       <div className="grid gap-6 lg:grid-cols-3">
         {plans.map((plan) => {
           const isSelected = selectedPlan === plan.id;
+          const isMockTest = activeTab === "mocktest";
+
           return (
             <div
               key={plan.id}
@@ -184,9 +195,9 @@ export default function ChoosePlan() {
                 }`}
               >
                 {/* Recommended Badge */}
-                {plan.recommended && (
+                {!isMockTest && plan.recommended && (
                   <div
-                    className={`absolute  right-6 rounded-full px-4 py-1 text-sm font-semibold ${
+                    className={`absolute right-6 rounded-full px-4 py-1 text-sm font-semibold ${
                       isSelected
                         ? "bg-white text-[#EF5634]"
                         : "bg-white text-gray-700"
@@ -197,14 +208,22 @@ export default function ChoosePlan() {
                 )}
 
                 {/* Plan Name and Description */}
-                <h3 className="text-2xl font-bold">{plan.name}</h3>
-                <p
-                  className={`mt-1 text-sm ${
-                    isSelected ? "text-white/90" : "text-gray-600"
-                  }`}
-                >
-                  {plan.description}
-                </p>
+                {isMockTest ? (
+                  <h3 className="text-2xl font-bold text-center bg-white text-black rounded-2xl py-1 md:mx-30">
+                    {plan.mock}
+                  </h3>
+                ) : (
+                  <>
+                    <h3 className="text-2xl font-bold">{plan.name}</h3>
+                    <p
+                      className={`mt-1 text-sm ${
+                        isSelected ? "text-white/90" : "text-gray-600"
+                      }`}
+                    >
+                      {plan.description}
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Body Section - always light background */}
@@ -250,5 +269,3 @@ export default function ChoosePlan() {
     </div>
   );
 }
-
-
