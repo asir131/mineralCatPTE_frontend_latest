@@ -453,7 +453,7 @@ const ProgressDemo = () => {
 
             <div className="grid gap-4 md:grid-cols-3">
               <Link
-                href="/terms"
+                href="/templates"
                 className="group flex items-center justify-center rounded-2xl bg-[#F7A6C5] px-6 py-6 text-white shadow-sm transition-transform duration-200 hover:-translate-y-1"
               >
                 <div className="flex flex-col items-center gap-3">

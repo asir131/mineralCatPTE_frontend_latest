@@ -21,7 +21,7 @@ const subscriptionPlans: Plan[] = [
     id: "Essential",
     name: "Essential",
     description: "For light preparation",
-    price: "$ 199.99",
+    price: "€ 199.99",
     buttonText: "Get Essential",
     features: [
       "30 Days Coaching",
@@ -37,7 +37,7 @@ const subscriptionPlans: Plan[] = [
     id: "Premium",
     name: "Premium",
     description: "For consistent Progress",
-    price: "$ 299.99",
+    price: "€ 299.99",
     buttonText: "Get Premium",
     recommended: true,
     features: [
@@ -54,7 +54,7 @@ const subscriptionPlans: Plan[] = [
     id: "Master",
     name: "Master",
     description: "For complete preparation",
-    price: "$ 499.99",
+    price: "€ 499.99",
     buttonText: "Get Master",
     features: [
       "Until you get your PTE",
