@@ -20,7 +20,7 @@ export default function Home() {
         <ChoosePrep />
       </div>
       <PracticeOverview />
-      <FAQ />
+      <FAQ endpoint="/faqs/home" />
       <WhereverUare />
       <UsersSaying />
       <ChoosePlan />

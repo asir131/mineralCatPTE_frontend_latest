@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import woman from "@public/faq/woman.png";
 import Link from "next/link";
 
-const FAQ = () => {
+type FAQProps = {
+  endpoint?: string;
+};
+
+const FAQ = ({ endpoint = "/faqs" }: FAQProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [faqData, setFaqData] = useState<{ question: string; answer: string }[]>(
     []
@@ -16,7 +20,7 @@ const FAQ = () => {
   useEffect(() => {
     const loadFaqs = async () => {
       try {
-        const response = await fetch(`${baseUrl}/faqs`);
+        const response = await fetch(`${baseUrl}${endpoint}`);
         if (!response.ok) {
           throw new Error("Failed to load FAQs");
         }
@@ -30,7 +34,7 @@ const FAQ = () => {
     };
 
     loadFaqs();
-  }, [baseUrl]);
+  }, [baseUrl, endpoint]);
 
   const toggleDropdown = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
